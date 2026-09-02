@@ -2,7 +2,7 @@ using System;
 using Microsoft.Data.Sqlite; // Utiliza la libreria del sistema
 using Npgsql;
 
-namespace SeccionCliente_old // Define el espacio de nombres SeccionCliente
+namespace SeccionCliente_v2 // Define el espacio de nombres SeccionCliente
 {
 
     class Cliente
@@ -13,7 +13,7 @@ namespace SeccionCliente_old // Define el espacio de nombres SeccionCliente
 
     class Program // Define la clase Program
     {
-        private static string CadenaConexion = "Host=localhost;Username=postgres;Password=1234;Database=postgres"; // Cadena 
+        private static string CadenaConexion = "Host=localhost;Username=postgres;Password=lerolero123;Database=postgres"; // Cadena 
 
         public static void MenuClientes() // Método para mostrar menu y funciones.
         {            

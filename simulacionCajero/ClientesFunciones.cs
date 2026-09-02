@@ -1,73 +1,12 @@
 using System;
-using Microsoft.Data.Sqlite; // Utiliza la libreria del sistema
+using Microsoft.Data.Sqlite;
 using Npgsql;
 
-namespace SeccionCliente_old // Define el espacio de nombres SeccionCliente
+namespace SeccionCliente
 {
-
-    class Cliente
+    public partial class Program
     {
-        public int Id { get; set; } = 0; // Propiedad para el ID de la sucursal
-        public string Nombre { get; set; } = String.Empty;
-    }
-
-    class Program // Define la clase Program
-    {
-        private static string CadenaConexion = "Host=localhost;Username=postgres;Password=1234;Database=postgres"; // Cadena 
-
-        public static void MenuClientes() // Método para mostrar menu y funciones.
-        {            
-            int opcion = 0;
-
-            while (true)
-            {
-                Console.Clear();
-                Console.WriteLine("\nPrograma ATM BANCO\n"); // Muestra un mensaje de bienvenida en la consola
-                // Aquí puedes agregar más código para la funcionalidad de la terminal
-
-                Console.WriteLine("[1] Cargar Cliente (Alta)");            
-                Console.WriteLine("[2] Modicar Cliente (Modificar)");
-                Console.WriteLine("[3] Eliminar Cliente (Borrar))");
-                Console.WriteLine("[4] Listar Clientes (Listar)");
-                Console.WriteLine("[5] Comprobar conexion con base de datos postgres");
-                Console.WriteLine("[0] Regresar");
-
-                Console.Write("Ingrese una opción: "); // Solicita al usuario que ingrese una opción
-                opcion = Convert.ToInt32(Console.ReadLine()); // Lee la opción ingresada por el usuario y la convierte a entero                
-
-                if (opcion == 0)
-                    break;
-
-                switch (opcion)
-                {                    
-                    case 1:
-                        CargarClienteBD();
-                        break;
-                    case 2:                    
-                        ModificarClienteBD();                   
-
-                        break;
-                    case 3:
-                        EliminarClienteBD();
-
-                        break;
-                    case 4:
-                        Console.WriteLine("\n Listar Clientes \n");
-                        ListarClientesBD();
-
-                        break;
-                    case 5:
-                        TestBD();
-
-                        break;
-                    default:
-                        Console.WriteLine("Invalido");
-                        break;
-                }
-            }   
-        
-
-        }
+        private static string CadenaConexion = "Host=localhost;Username=postgres;Password=1234;Database=postgres";
 
         static string SolicitarCadena(string mensaje)
         {
@@ -82,27 +21,22 @@ namespace SeccionCliente_old // Define el espacio de nombres SeccionCliente
 
             try
             {
-                // Inicializa la conexión
                 using (var connection = new NpgsqlConnection(CadenaConexion))
                 {
-                    // Intenta abrir la conexión
                     connection.Open();
-                    
-                    // Si llega acá, la conexión fue exitosa
                     Console.WriteLine("¡Conexión exitosa a la base de datos PostgreSQL desde C#!");
                 }
             }
             catch (Exception ex)
             {
-                // Si salta una excepción, muestra el mensaje de error
                 Console.WriteLine("No se pudo realizar la conexión con la base de datos.");
                 Console.WriteLine($"Error detectado: {ex.Message}");
             }
 
             Console.Write("\n\nPresione una tecla para continuar");
             Console.ReadKey();
-
         }
+
         private static void CargarClienteBD()
         {
             Console.Clear();
@@ -146,23 +80,15 @@ namespace SeccionCliente_old // Define el espacio de nombres SeccionCliente
 
                 using (var command = connection.CreateCommand())
                 {
-                    // Assign the select query to CommandText
                     command.CommandText = "SELECT Id, Nombre FROM Clientes";                    
 
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            // Access data using standard column names or indexing
                             int id = reader.GetInt32(0);
                             string name = reader.GetString(1);
                             
-                            /*
-                            var cliente = new Cliente
-                            {
-                                Id = id,
-                                Nombre = name
-                            };*/
                             Console.WriteLine($"\t{id} \t {name}");
                         }
                     }
@@ -240,9 +166,5 @@ namespace SeccionCliente_old // Define el espacio de nombres SeccionCliente
             Console.Write("Presione una tecla para continuar");
             Console.ReadKey();
         }
-
-
     }
-
-
 }
