@@ -11,7 +11,7 @@ namespace SeccionCliente
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("\nPrograma ATM BANCO VINTAJE\n");
+                Console.WriteLine("\nPrograma ATM BANCO VINTAJE \n");
                 Console.WriteLine("[1] Cargar Cliente (Alta)");            
                 Console.WriteLine("[2] Modicar Cliente (Modificar)");
                 Console.WriteLine("[3] Eliminar Cliente (Borrar))");
@@ -20,7 +20,12 @@ namespace SeccionCliente
                 Console.WriteLine("[0] Regresar");
 
                 Console.Write("Ingrese una opción: ");
-                opcion = Convert.ToInt32(Console.ReadLine());                
+                //opcion = Convert.ToInt32(Console.ReadLine());                
+
+                if (!int.TryParse(Console.ReadLine(), out opcion))
+                {
+                    opcion = -1;
+                }
 
                 if (opcion == 0)
                     break;
@@ -44,7 +49,10 @@ namespace SeccionCliente
                         TestBD();
                         break;
                     default:
-                        Console.WriteLine("Invalido");
+                        Console.Clear();
+                        Console.WriteLine("Opcion invalida. Intente de nuevo.");
+                        Console.Write("Presione una tecla para continuar...");
+                        Console.ReadKey();
                         break;
                 }
             }   

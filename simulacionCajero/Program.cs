@@ -38,7 +38,12 @@ namespace TerminalPrincipal // Define el espacio de nombres TerminalPrincipal
                 Console.WriteLine("[0] Salir");
 
                 Console.Write("Ingrese una opción: "); // Solicita al usuario que ingrese una opción
-                opcion = Convert.ToInt32(Console.ReadLine()); // Lee la opción ingresada por el usuario y la convierte a entero                
+                //opcion = Convert.ToInt32(Console.ReadLine()); // Lee la opción ingresada por el usuario y la convierte a entero                
+
+                if (!int.TryParse(Console.ReadLine(), out opcion))
+                {
+                    opcion = -1;
+                }
 
                 if (opcion == 0)
                     break;
@@ -97,7 +102,10 @@ namespace TerminalPrincipal // Define el espacio de nombres TerminalPrincipal
                         SeccionCliente.Program.MenuClientes();
                         break;
                     default:
-                        Console.WriteLine("Invalido");
+                        Console.Clear();
+                        Console.WriteLine("Opcion invalida. Intente de nuevo");
+                        Console.Write("Presione una tecla para continuar...");
+                        Console.ReadKey();
                         break;
                 }
             }   
