@@ -43,6 +43,7 @@ CREATE TABLE clientes (
     razon_social VARCHAR(150),
     cliente_cuil VARCHAR(11),
     pin VARCHAR(255),
+    fecha_nacimiento DATE,
     fecha_alta DATE,
 
     CONSTRAINT fk_cliente_cliente
