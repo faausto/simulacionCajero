@@ -40,8 +40,8 @@ CREATE TABLE clientes (
     domicilio VARCHAR(200),
     telefono VARCHAR(30),
     es_persona_fisica BOOLEAN NOT NULL,
-    razon_social VARCHAR(150),
-    cliente_cuil VARCHAR(11),
+    razon_social VARCHAR(150) NULL,
+    cliente_cuil VARCHAR(11) NULL,
     pin VARCHAR(255),
     fecha_nacimiento DATE,
     fecha_alta DATE,
@@ -55,7 +55,7 @@ CREATE TABLE cuentas_bancarias (
     numero_cuenta BIGINT PRIMARY KEY,
     sucursal_id INTEGER NOT NULL,
     tipo_cuenta_id INTEGER NOT NULL,
-    monto_sobregiro NUMERIC(15,2),
+    monto_sobregiro DOUBLE PRECISION,
     es_activa BOOLEAN NOT NULL,
     fecha_alta DATE,
 
@@ -93,7 +93,7 @@ CREATE TABLE movimientos (
     movimiento_id BIGINT PRIMARY KEY,
     numero_cuenta BIGINT NOT NULL,
     fecha_hora TIMESTAMP NOT NULL,
-    monto NUMERIC(15,2) NOT NULL,
+    monto DOUBLE PRECISION NOT NULL,
     tipo_movimiento_id INTEGER NOT NULL,
 
     CONSTRAINT fk_movimiento_cuenta
